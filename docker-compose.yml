@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app  # Монтируем весь проект
+      - ./data:/app/data  # Опционально: для сохранения БД
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
