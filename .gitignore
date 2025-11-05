@@ -1,0 +1,39 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+
+# === Environment & Secrets ===
+.env
+*.env
+*.secret
+
+# === Database & Data ===
+data/
+*.db
+*.sqlite3
+
+# === Logs ===
+*.log
+logs/
+*.log.*
+
+# === OS / IDE ===
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# === Docker ===
+*.pid
+*.sock
+
+# === Tests / Cache ===
+pytest_cache/
+.coverage
+.tox/
+dist/
+build/
