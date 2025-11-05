@@ -16,21 +16,37 @@ docker-compose --version
 
 2. Клонируйте/скопируйте все файлы проекта в одну директорию
 
-3. Запустите приложение:
+3. Для корректной работы API необходимо создать файл .env в корне проекта.
+Файл должен содержать ключевые параметры конфигурации, используемые приложением.
+
+Пример:
+# === API Key для аутентификации запросов ===
+API_KEY=fastapi+pydantic+sqlalchemy+alembic
+
+# === Конфигурация базы данных ===
+# По умолчанию используется SQLite, база хранится локально в ./data/
+DB_ENGINE=sqlite
+DB_NAME=./data/organizations.db
+
+# === Общие настройки Python ===
+PYTHONUNBUFFERED=1
+
+
+4. Запустите приложение:
 ```bash
 docker-compose up --build -d
 ```
 
-4. API будет доступен по адресу: http://localhost:8000
+5. API будет доступен по адресу: http://localhost:8000
 
-5. Документация Swagger UI: http://localhost:8000/docs
+6. Документация Swagger UI: http://localhost:8000/docs
 
 ## API Endpoints
 
 ### Аутентификация
 Все запросы требуют заголовок:
 ```
-X-API-Key: fastapi+pydantic+sqlalchemy+alembic
+X-API-Key: (здесь API_KEY из .env)
 ```
 
 ### Организации

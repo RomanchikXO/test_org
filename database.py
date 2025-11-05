@@ -3,9 +3,16 @@
 """
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DB_ENGINE = os.getenv("DB_ENGINE", "sqlite")
+DB_NAME = os.getenv("DB_NAME", "./data/organizations.db")
 
 # SQLite база данных
-SQLALCHEMY_DATABASE_URL = "sqlite:///./data/organizations.db"
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_NAME}"
 
 # Создание движка БД
 engine = create_engine(

@@ -1,8 +1,9 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, Depends, HTTPException, status, Security, Query
 from fastapi.security import APIKeyHeader
 from sqlalchemy.orm import Session
-from sqlalchemy import func
-from typing import List, Optional
+from typing import List
 import math
 
 from database import engine, get_db
@@ -13,6 +14,8 @@ from schemas import (
     ActivityCreate, ActivityResponse
 )
 
+load_dotenv()
+
 # Создание таблиц
 Base.metadata.create_all(bind=engine)
 
@@ -22,13 +25,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
-API_KEY = "fastapi+pydantic+sqlalchemy+alembic"
+API_KEY = os.getenv("API_KEY")
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)
 
 
 def verify_api_key(api_key: str = Security(api_key_header)):
     if api_key != API_KEY:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Неверный API ключ")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Неверный API ключ"
+        )
     return api_key
 
 

@@ -6,6 +6,6 @@ services:
     volumes:
       - .:/app  # Монтируем весь проект
       - ./data:/app/data  # Опционально: для сохранения БД
-    environment:
-      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
     restart: unless-stopped
