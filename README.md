@@ -1,8 +1,10 @@
 # REST API приложение для управления организациями
 
 ## Описание
-REST API для управления организациями, зданиями и видами деятельности с использованием FastAPI, SQLAlchemy и статической аутентификации по API ключу.
+REST API для управления организациями, зданиями и видами деятельности с использованием FastAPI, SQLAlchemy 
+и статической аутентификации по API ключу.
 
+Так как проект тестовый то была выбрана sqlite как легковесная бд-шка )) для продакшена можно было бы юзать PostgreSQL
 
 ```
 
@@ -37,9 +39,22 @@ PYTHONUNBUFFERED=1
 docker-compose up --build -d
 ```
 
-5. API будет доступен по адресу: http://localhost:8000
+5. Настройка alembic
+```bash
+docker-compose exec api alembic init alembic
+```
+После этого откройте alembic.ini и укажите URL вашей базы данных:
+sqlalchemy.url = sqlite:///./data/organizations.db
 
-6. Документация Swagger UI: http://localhost:8000/docs
+Создаём первую миграцию и применяем её:
+```bash
+docker-compose exec api alembic revision --autogenerate -m "Initial migration"
+docker-compose exec api alembic upgrade head
+```
+
+6. API будет доступен по адресу: http://localhost:8000
+
+7. Документация Swagger UI: http://localhost:8000/docs
 
 ## API Endpoints
 
